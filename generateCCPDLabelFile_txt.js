@@ -16,7 +16,6 @@ fs.readdir(CCPD, (err, files) => {
         let [area, tiltDegree, boundingBoxCoordinates, fourVerticesLocations, licensePlateNumber, brightness, blurriness] = fileName.split('-').map(e => e.split('_'))
 
         const [p1, p2] = boundingBoxCoordinates.map(p => p.split('&'))
-        
         const w = p2[0] - p1[0]
         const h = p2[1] - p1[1]
         const x = p1[0] + w / 2
@@ -26,13 +25,12 @@ fs.readdir(CCPD, (err, files) => {
             if (err) throw err
             console.log(`writed ${fileName}.txt`)
         })
-        
 
-        // 替換車牌號碼
+        // 重檔案名分析車牌號碼
         licensePlateNumber = [
             provinces[licensePlateNumber[0]], 
             alphabets[licensePlateNumber[1]], 
-            ...licensePlateNumber.slice(2).map(e => ads[e])
+            ...licensePlateNumber.slice(2).map(char => ads[char])
         ]
         console.log(licensePlateNumber)
     })
