@@ -12,16 +12,7 @@ fs.readdir(CCPD, (err, files) => {
     if (err) throw err
     files.forEach(file => {
         console.log(file)
-        const fileName = file.replace(/.(jpg|jpeg|png)$/, '')
-        let [area, tiltDegree, boundingBoxCoordinates, fourVerticesLocations, licensePlateNumber, brightness, blurriness] = fileName.split('-').map(e => e.split('_'))
-
-        const [p1, p2] = boundingBoxCoordinates.map(p => p.split('&'))
-        const w = p2[0] - p1[0]
-        const h = p2[1] - p1[1]
-        const x = p1[0] + w / 2
-        const y = p1[1] + h / 2
-        const txt = `${label} ${x} ${y} ${w} ${h}`
-        fs.writeFile(`${CCPD}/${fileName}.txt`, txt, err => {
+        fs.writeFile(`${CCPD}/${fileName}.txt`, txt(file), err => {
             if (err) throw err
             console.log(`writed ${fileName}.txt`)
         })
@@ -33,5 +24,30 @@ fs.readdir(CCPD, (err, files) => {
             ...licensePlateNumber.slice(2).map(char => ads[char])
         ]
         console.log(licensePlateNumber)
+    })
+})
+
+function txt(file) {
+    const fileName = file.replace(/.(jpg|jpeg|png)$/, '')
+        let [area, tiltDegree, boundingBoxCoordinates, fourVerticesLocations, licensePlateNumber, brightness, blurriness] = fileName.split('-').map(e => e.split('_'))
+
+        const [p1, p2] = boundingBoxCoordinates.map(p => p.split('&'))
+        const w = p2[0] - p1[0]
+        const h = p2[1] - p1[1]
+        const x = p1[0] + w / 2
+        const y = p1[1] + h / 2
+        return `${label} ${x} ${y} ${w} ${h}`
+}
+
+const splitFiles = ['blur', 'challenge', 'db', 'fn', 'rotate', 'tilt']
+splitFiles.forEach(splitFile => {
+    fs.readFile(`${CCPD}/split/ccpd_${splitFile}.txt`, (err, data) => {
+        if (err) throw err
+        const paths = data.toString().split('\n')
+        paths.forEach(path => {
+            fs.writeFile(path, txt(path), err => {
+                if (err) throw err
+            })
+        })
     })
 })
