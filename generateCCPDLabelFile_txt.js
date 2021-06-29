@@ -11,27 +11,22 @@ const ads = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P
 
 const splitFiles = ['blur', 'challenge', 'db', 'fn', 'rotate', 'tilt']
 
-splitFiles.forEach(splitFile => {
-    fs.readdir(`${CCPD}/ccpd_${splitFile}`, (err, files) => {
-        if (err) throw err
-        files.forEach(file => {
-            console.log(file)
-            const fileName = file.replace(/.(jpg|jpeg|png)$/, '')
-            fs.writeFile(`${CCPD}/ccpd_${splitFile}/${fileName}.txt`, txt(fileName), err => {
-                if (err) throw err
-                console.log(`written ccpd_${splitFile}/${fileName}.txt`)
-            })
+// splitFiles.forEach(splitFile => {
+//     fs.readdir(`${CCPD}/ccpd_${splitFile}`, (err, files) => {
+//         if (err) throw err
+//         files.forEach(file => {
+//             console.log(file)
+//             const fileName = file.replace(/.(jpg|jpeg|png)$/, '')
+//             fs.writeFile(`${CCPD}/ccpd_${splitFile}/${fileName}.txt`, txt(fileName), err => {
+//                 if (err) throw err
+//                 console.log(`written ccpd_${splitFile}/${fileName}.txt`)
+//             })
 
-            // 重檔案名分析車牌號碼
-            licensePlateNumber = [
-                provinces[licensePlateNumber[0]], 
-                alphabets[licensePlateNumber[1]], 
-                ...licensePlateNumber.slice(2).map(char => ads[char])
-            ]
-            console.log(licensePlateNumber)
-        })
-    })
-})
+//             const licensePlateNumber = alpn(fileName)
+//             console.log(licensePlateNumber)
+//         })
+//     })
+// })
 
 splitFiles.forEach(splitFile => {
     fs.readFile(`${CCPD}/splits/ccpd_${splitFile}.txt`, (err, data) => {
