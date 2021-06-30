@@ -1,4 +1,6 @@
 const fs = require('fs')
+const gracefulFs = require('gracefal-fs')
+gracefulFs.gracefulify(fs)
 
 const CCPD = 'CCPD2019'
 const CCPDPath = `${__dirname}/${CCPD}`
