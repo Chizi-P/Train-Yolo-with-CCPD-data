@@ -1,9 +1,9 @@
 const fs = require('fs')
-const gracefulFs = require('gracefal-fs')
+const gracefulFs = require('graceful-fs')
 gracefulFs.gracefulify(fs)
 
 const CCPD = 'CCPD2019'
-const CCPDPath = `${__dirname}/${CCPD}`
+const CCPDPath = `/content/${CCPD}`
 
 // 定義為車牌的label
 const label = ['license plate']
