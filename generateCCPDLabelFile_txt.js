@@ -15,7 +15,7 @@ const provinces = ["皖", "沪", "津", "渝", "冀", "晋", "蒙", "辽", "吉"
 const alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'O']
 const ads = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'O']
 
-const splitFiles = ['blur', 'challenge', 'db', 'fn', 'rotate', 'tilt']
+const splitFiles = ['blur', 'challenge', 'db', 'fn', 'rotate', 'tilt', 'train', 'test', 'val']
 
 // splitFiles.forEach(splitFile => {
 //     fs.readdir(`${CCPDPath}/ccpd_${splitFile}`, (err, files) => {
