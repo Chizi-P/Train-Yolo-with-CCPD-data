@@ -1,1 +1,1 @@
-# Train-Yolo-with-CCPD-data
+# Train Yolo with CCPD data
